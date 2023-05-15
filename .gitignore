@@ -1,0 +1,7 @@
+*~
+*.bak
+*.out
+*#
+main.c
+main.out
+[0-9]*.c
