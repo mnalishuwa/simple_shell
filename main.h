@@ -87,5 +87,8 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 int _fileno(FILE *stream);
 
-#endif
+char *normalize_wspace(char *_str, size_t len_s);
 
+char **_strtok(char *_str, const char *_delim);
+
+#endif
