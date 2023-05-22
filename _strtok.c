@@ -58,7 +58,6 @@ char **_strtok(char *_str, const char *_delim)
 {
 	char **args = NULL;
 	char *begin, *end, *dptr;
-	const char * __attribute__((unused)) _str2 = (const char *)_str;
 	size_t wlength, wcount = 0, dlength, __attribute__((unused)) slength;
 
 	begin = _str;
@@ -135,7 +134,7 @@ char *normalize_wspace(char *_str, size_t len_s)
 	}
 
 	cln_str[j] = '\0';
-    del_twspace(cln_str);
+	del_twspace(cln_str);
 
 	return (cln_str);
 }
@@ -148,8 +147,8 @@ char *normalize_wspace(char *_str, size_t len_s)
  */
 void del_twspace(char *s)
 {
-    size_t i = 0;
-    int last_char = -1;
+	size_t i = 0;
+	int last_char = -1;
 
 	while (s[i] != '\0')
 	{
