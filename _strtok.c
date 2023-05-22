@@ -6,17 +6,27 @@
 
 int main(void)
 {
-	size_t len_s, len_s2;
-	char *s, *cln_s;
+	size_t len_s = 0, len_s2 = 0, i = 0;
+	char s[] = "     ls la myfolder myfolder folder\t\t     ", *cln_s, **s2;
 
-	s = "       Hello\t  World\t\t     ";
+	//s = "       Hello\t  World\t\t     ";
+    //s = "     ls la myfolder myfolder folder\t\t     ";
 	len_s = strlen(s);
 	printf("s initial = %s, len_s = %lu\n", s, len_s);
 	cln_s = normalize_wspace(s, len_s);
-	len_s2 = strlen(s);
-	printf("s result = %s, len_s = %lu\n\n", cln_s, len_s2);
-	/* s2 = _strtok(cln_s, ' '); */
+	len_s2 = strlen(cln_s);
+    //s3 = strdup(cln_s);
+	printf("s normalized result = %s, len_s = %lu\n\n", cln_s, len_s2);
+	s2 = _strtok(cln_s, " ");
+    for (i = 0; s2[i] != NULL; i++)
+    {
+        printf("args[%lu] = %s\n", i, s2[i]);
+		if (s2[i] != NULL)
+			free(s2[i]);
+    }
 
+	free(cln_s);
+	free(s2);
 	return (0);
 }
 
@@ -48,9 +58,11 @@ char **_strtok(char *_str, const char *_delim)
 {
 	char **args = NULL;
 	char *begin, *end, *dptr;
+	const char * __attribute__((unused)) _str2 = (const char *)_str;
 	size_t wlength, wcount = 0, dlength, __attribute__((unused)) slength;
 
-	begin = end = _str;
+	begin = _str;
+	end = _str;
 	dlength = strlen(_delim);
 	slength = strlen(_str);
 
@@ -64,16 +76,24 @@ char **_strtok(char *_str, const char *_delim)
 		args[wcount] = malloc(sizeof(char) * wlength);
 		strncpy(args[wcount], begin, wlength);
 		wcount++;
-		dptr += dlength;
+		if ((slength - (end - _str)) > dlength)
+		{
+			dptr += dlength;
+		}
 		begin = dptr;
 		dptr = strstr(begin, _delim);
 	}
-	args = realloc(args, sizeof(char *) * (wcount + 1));
-	wlength = strlen(begin) + 1;
-	args[wcount] = malloc(sizeof(char) * wlength);
-	strncpy(args[wcount], begin, wlength);
-	wcount++;
-	args[wcount] = NULL;
+
+	if (wcount > 0)
+	{
+		args = realloc(args, sizeof(char *) * (wcount + 1));
+		wlength = strlen(begin) + 1;
+		args[wcount] = malloc(sizeof(char) * wlength);
+		strncpy(args[wcount], begin, wlength);
+		wcount++;
+		args = realloc(args, sizeof(char *) * (wcount + 1));
+		args[wcount] = NULL;
+	}
 
 	return (args);
 }
@@ -91,10 +111,9 @@ char **_strtok(char *_str, const char *_delim)
 char *normalize_wspace(char *_str, size_t len_s)
 {
 	char *cln_str;
-	size_t i, j;
-	int last_char = -1;
+	size_t i = 0, j = 0;
 
-	cln_str = malloc(sizeof(char) * (len_s + 1));
+	cln_str = malloc(sizeof(char) * (len_s + 2));
 
 	for (i = 0, j = 0; _str[i] != '\0'; j++, i++)
 	{
@@ -116,14 +135,27 @@ char *normalize_wspace(char *_str, size_t len_s)
 	}
 
 	cln_str[j] = '\0';
-	i = 0;
-	while (cln_str[i] != '\0')
+    del_twspace(cln_str);
+
+	return (cln_str);
+}
+
+/**
+ * del_twspace - get rid of trailing whitespace
+ * Description: removes any extra spaces at the end of a string
+ *
+ * Return: void
+ */
+void del_twspace(char *s)
+{
+    size_t i = 0;
+    int last_char = -1;
+
+	while (s[i] != '\0')
 	{
-		if (cln_str[i] != ' ' && cln_str[i] != '\t' && cln_str[i] != '\n')
+		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n')
 			last_char = i;
 		i++;
 	}
-	cln_str[last_char + 1] = '\0';
-
-	return (cln_str);
+	s[last_char + 1] = '\0';
 }

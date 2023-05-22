@@ -83,12 +83,31 @@ void _printenv(char **env);
 
 int _strcmp(char *s1, char *s2);
 
+/* get a stream of characters from stdin */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
+/* get the file descriptor from a FILE stream */
 int _fileno(FILE *stream);
 
+/* remove excess whitespace */
 char *normalize_wspace(char *_str, size_t len_s);
 
+/* tokenize string and return an array of words from the string */
 char **_strtok(char *_str, const char *_delim);
+
+/* find substring in string */
+char *_strstr(char *haystack, char *needle);
+
+/* copy string from source upto max n bytes */
+char *_strncpy(char *dest, char *src, size_t n);
+
+/* allocate new_sized ptr and copy contents of old into new ptr */
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+
+/* get null terminated string length */
+int _strlen(char *s);
+
+/* delete trailing whitespace */
+void del_twspace(char *s);
 
 #endif
