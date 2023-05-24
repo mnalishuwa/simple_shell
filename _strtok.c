@@ -1,36 +1,6 @@
 #include "main.h"
 
 /**
- * main - test _strtok
- */
-
-/* int main(void) */
-/* { */
-/* 	size_t len_s = 0, len_s2 = 0, i = 0; */
-/* 	char s[] = "     ls la myfolder myfolder folder\t\t     ", *cln_s, **s2; */
-
-/* 	/\* s = "       Hello\t  World\t\t     "; *\/ */
-/* 	/\* s = "     ls la myfolder myfolder folder\t\t     "; *\/ */
-/* 	len_s = strlen(s); */
-/* 	printf("s initial = %s, len_s = %lu\n", s, len_s); */
-/* 	cln_s = normalize_wspace(s, len_s); */
-/* 	len_s2 = strlen(cln_s); */
-/* 	/\* s3 = strdup(cln_s); *\/ */
-/* 	printf("s normalized result = %s, len_s = %lu\n\n", cln_s, len_s2); */
-/* 	s2 = _strtok(cln_s, " "); */
-/* 	for (i = 0; s2[i] != NULL; i++) */
-/* 	{ */
-/* 		printf("args [%lu] = %s\n", i, s2[i]); */
-/* 		if (s2[i] != NULL) */
-/* 			free(s2[i]); */
-/* 	} */
-
-/* 	free(cln_s); */
-/* 	free(s2); */
-/* 	return (0); */
-/* } */
-
-/**
  * _strtok - parses a string into a sequence of tokens
  * Description: splits a string into tokens based on a delimeter
  * It dynamically allocates memory, therefore the caller must free

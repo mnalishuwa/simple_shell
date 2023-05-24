@@ -1,18 +1,5 @@
 #include "main.h"
 
-
-/* int main(int __attribute__((unused)) argc, char  __attribute__((unused)) **argv, char **env) */
-/* { */
-/* 	 char s[] = "less"; */
-/* 	 char *cmd_path; */
-/* 	 /\* char *test_args; *\/ */
-
-/* 	 cmd_path = search_path(s, env); */
-/* 	 printf("search p = %s\n", cmd_path); */
-/* 	 free(cmd_path); */
-
-/* } */
-
 /**
  * search_path - function searchs for a command on the path
  * Description: searches the path for a command and returns
