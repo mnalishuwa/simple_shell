@@ -1,16 +1,5 @@
 #include "main.h"
 
-
-/* int main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv, char **env) */
-/* { */
-/* 	char *_path = getenv("jones"); */
-/* 	char *env_var_val = _getenv("jones", env); */
-/* 	printf("_getenv = %s\n\ngetenv = %s\n", env_var_val, _path); */
-/*     free(env_var_val); */
-
-/*     return (0); */
-/* } */
-
 /**
  * _getenv - get the value of an environment variable
  * Description: takes a string argument and checks if the

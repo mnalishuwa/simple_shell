@@ -1,18 +1,5 @@
 #include "main.h"
 
-/* int main(void) */
-/* { */
-/*	char *s = NULL; */
-/*	size_t len = 0; */
-/*	ssize_t nchars; */
-
-/*	nchars = _getline(&s, &len, stdin); */
-
-/*	printf("s = %s\nlen = %zu\nnchars = %zd\nlen s = %zu\n", s, len, nchars, strlen(s)); */
-/*	free(s); */
-/*	return (0); */
-/* } */
-
 /**
  * _getline - custom getline function
  * Description: function reads input from stdin
