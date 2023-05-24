@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stddef.h>
 
 /**
  * _strstr - finds a substring within another string
@@ -14,6 +15,11 @@ char *_strstr(char *haystack, char *needle)
 {
 	int start, i, len_s, len_n;
 
+	if (haystack == NULL || needle == NULL)
+	{
+		perror("error: _strstr passed null values\n");
+		return (NULL);
+	}
 
 	for (len_s = 0; haystack[len_s] != '\0'; len_s++)
 		;
