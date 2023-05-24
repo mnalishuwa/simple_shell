@@ -14,12 +14,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-struct _argv_argcount
-{
-	char **_args;
-	size_t _count;
-};
-
 /* _putchar - print single char to stdout */
 int _putchar(char c);
 
@@ -50,30 +44,14 @@ int _setenv(const char *name, const char *value, int overwrite);
 /* _unsetenv - deletes the value of an environment variable */
 int _unsetenv(const char *name);
 
-/* _strtoargs - creates a struct with an array of string arguments */
-struct _argv_argcount *_strtoargs(char *_str, const char __attribute__((unused)) *_DELIM);
-
-/* search_path - gets a command and checks if the file executable exists on the PATH */
-char *search_path(char *command);
+/* search_path - checks if the file executable exists on the PATH */
+char *search_path(char *command, char **env);
 
 void ctrlc_handler(int sig_int);
 
 void eof_handler(int nread, int e_no);
 
 void _exit_hsh(int status);
-
-typedef void (*env_func_t)(char **);
-typedef void (*ext_func_t)(int);
-
-struct inblts
-{
-	char *inb_command;
-	union
-	{
-		env_func_t env_func;
-		ext_func_t ext_func;
-	} inb_func;
-};
 
 void rm_linefeed(char *_str);
 
@@ -123,5 +101,9 @@ int _pow_recursion(int x, int y);
 void print_number(int n);
 
 void _puts(char *str);
+
+void _run_shell(char **env);
+
+int launch_program(char **args, char **env);
 
 #endif
