@@ -2,15 +2,15 @@
 
 /* int main(void) */
 /* { */
-/* 	char *s = NULL; */
-/* 	size_t len = 0; */
-/* 	ssize_t nchars; */
+/*	char *s = NULL; */
+/*	size_t len = 0; */
+/*	ssize_t nchars; */
 
-/* 	nchars = _getline(&s, &len, stdin); */
+/*	nchars = _getline(&s, &len, stdin); */
 
-/* 	printf("s = %s\nlen = %zu\nnchars = %zd\nlen s = %zu\n", s, len, nchars, strlen(s)); */
-/* 	free(s); */
-/* 	return (0); */
+/*	printf("s = %s\nlen = %zu\nnchars = %zd\nlen s = %zu\n", s, len, nchars, strlen(s)); */
+/*	free(s); */
+/*	return (0); */
 /* } */
 
 /**
