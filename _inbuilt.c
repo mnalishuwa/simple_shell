@@ -6,10 +6,11 @@
  * in order to call the correct inbuilt command
  *
  * @command: str, user command
+ * @env: environment pointer
  *
  * Return: value
  */
-int check_inbuilt(char *command, char** env)
+int check_inbuilt(char *command, char **env)
 {
 	size_t i;
 

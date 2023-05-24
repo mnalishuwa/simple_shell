@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * main - prints environment
+ * _printenv - prints environment
  * Description: prints environment using global variable environ
  *
  * @env: environment array pointer
