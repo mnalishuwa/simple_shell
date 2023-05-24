@@ -118,4 +118,10 @@ void create_path(char *dest, char *s1, char *s2);
 
 void free_args(char **args);
 
+int _pow_recursion(int x, int y);
+
+void print_number(int n);
+
+void _puts(char *str);
+
 #endif
