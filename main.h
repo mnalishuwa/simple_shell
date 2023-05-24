@@ -110,4 +110,12 @@ int _strlen(char *s);
 /* delete trailing whitespace */
 void del_twspace(char *s);
 
+int is_pathbased(char *command);
+
+char *search_path(char *command, char **env);
+
+void create_path(char *dest, char *s1, char *s2);
+
+void free_args(char **args);
+
 #endif

@@ -1,76 +1,160 @@
 #include "main.h"
 
-/* int main(void) */
-/* { */
-/* 	char s[] = "less"; */
-/* 	char *test_args; */
-/* 	/\* struct _arg_argcount test_args; *\/ */
 
-/* 	test_args = search_path(s); */
-/* 	printf("search p = %s\n", test_args); */
-/* } */
+int main(int __attribute__((unused)) argc, char  __attribute__((unused)) **argv, char **env)
+{
+	 char s[] = "less";
+	 char *cmd_path;
+	 /* char *test_args; */
+
+	 cmd_path = search_path(s, env);
+	 printf("search p = %s\n", cmd_path);
+	 free(cmd_path);
+
+}
 
 /**
  * search_path - function searchs for a command on the path
  * Description: searches the path for a command and returns
- * the full path if found, or null otherwise
+ * the full path if found, or null otherwise. It used
+ * dynamic memory allocation, it is the responsibility of
+ * the caller to free the memory after use.
  *
  * @command: str, command entry
+ * @env: environment pointer
  *
  * Return: command path to executable, or NULL if not found
  */
-
-char *search_path(char *command)
+char *search_path(char *command, char **env)
 {
-	size_t _dir_size = 0, cmd_size = 0;
-	char *_path, *cln_command, *_dir_token, *_stat_path = NULL;
-	const char *ENV_VAR = "PATH";
-	struct _argv_argcount *_argvc;
+	size_t dir_len = 0, clen = 0, i;
+	char *pathvalue, **pathdirs, *full_cpath = NULL;
+	const char *PATH_VARNAME = "PATH";
 	struct stat stat_buf;
 
-	_path = getenv(ENV_VAR);
-	if (!_path)
+	pathvalue = _getenv(PATH_VARNAME, env);
+
+	if (pathvalue == NULL)
 	{
-		printf("Error: %s not in environment", ENV_VAR);
+		perror("error: search_path, variable not found\n");
 		return (NULL);
 	}
-
-	if (!command || strlen(command) == 0)
-	{
+	if (command == NULL || _strlen(command) == 0)
 		return (NULL);
-	}
 
-	printf("command = %s\n", command);
-	if (command[0] == '/')
+	clen = _strlen(command);
+	if (is_pathbased(command) == 1)
 	{
-		rm_linefeed(command);
-		printf("Inside search path line 46\n");
 		if (stat(command, &stat_buf) == 0)
 			return (command);
-		printf("Inside search path line 49\n");
 		return (NULL);
 	}
 
-	_argvc = _strtoargs(command, "/");
-	cln_command = _argvc->_args[_argvc->_count - 1];
-	printf("cln_command = %s\n", cln_command);
-	rm_linefeed(cln_command);
-	printf("PATH=%s\n", _path);
-	_dir_token = strtok(strdup(_path), ":");
-	while (_dir_token != NULL)
+	pathdirs = _strtok(pathvalue, ":");
+	free(pathvalue);
+	/* rm_linefeed(command); */
+	for (i = 0; pathdirs[i] != NULL; i++)
 	{
-		_dir_size = strlen(_dir_token);
-		_stat_path = realloc(_stat_path, sizeof(char) * (_dir_size + cmd_size + 2));
-		sprintf(_stat_path, "%s/%s", _dir_token, cln_command);
-		printf("path = %s, dir = %s/%s\n", _stat_path, _dir_token, cln_command);
-		if (stat(_stat_path, &stat_buf) == 0)
-		{
-			return (_stat_path);
+		dir_len = _strlen(pathdirs[i]);
+		full_cpath = _realloc(full_cpath, 0, sizeof(char) * (dir_len + clen + 2));
+		create_path(full_cpath, pathdirs[i], command);/* printf("fpath\n"); */
+		if (stat(full_cpath, &stat_buf) == 0)
+		{/* printf("Command found = %s\n", full_cpath); */
+			free_args(pathdirs);
+			return (full_cpath);
 		}
-		_dir_token = strtok(NULL, ":");
+	}
+	free(full_cpath);
+	free_args(pathdirs);
+	return (NULL);
+}
+
+/**
+ * free_args - frees a dynamically allocated array of strings
+ * Description: frees an array of strings
+ *
+ * @args: string array to be freed
+ *
+ * Return: void
+*/
+void free_args(char **args)
+{
+	size_t i;
+
+	if (args == NULL)
+	{
+		perror("error - free_args, args is null");
+		return;
 	}
 
-	return (NULL);
+	for (i = 0; args[i] != NULL; i++)
+	{
+		free(args[i]);
+	}
+	free(args);
+}
+
+/**
+ * create_path - concatenates 2 strings into specified destination
+ * Description concats 2 strings separated by a / to specified
+ * destination, this is used to create a full filepath given
+ * a directory and a command, it is a utility function used
+ * to help search_path to search through PATH files for a
+ * command/program
+ *
+ * @dest: output string
+ * @s1: foldername string
+ * @s2: command/program name
+ *
+ * Return: void
+*/
+void create_path(char *dest, char *s1, char *s2)
+{
+	size_t i, j;
+
+	if (dest == NULL || s1 == NULL || s2 == NULL)
+	{
+		perror("error: create_path passed null\n");
+	}
+
+	for (i = 0; s1[i] != '\0'; i++)
+		dest[i] = s1[i];
+	dest[i] = '/';
+	i++;
+	for (j = 0; s2[j] != '\0'; j++)
+		dest[i + j] = s2[j];
+	dest[i + j] = '\0';
+}
+
+/**
+ * is_pathbased - checks if command contains forward slash
+ * Description: checks if forward slash is in the command,
+ * if / is in the command, it indicates the command should
+ * be path based and the search for the program should occur
+ * on the path specified.
+ *
+ * @command: string command
+ *
+ * Return: 1 if path is specified in the command, 0 otherwise,
+ * -1 for an error
+*/
+int is_pathbased(char *command)
+{
+	size_t i;
+
+	if (command == NULL)
+	{
+		perror("error: is_abs_relative passed null\n");
+		return (-1);
+	}
+
+	for (i = 0; command[i] != '\0'; i++)
+	{
+		if (command[i] == '/')
+			return (1);
+	}
+
+	return (0);
 }
 
 /**
@@ -94,57 +178,4 @@ void rm_linefeed(char *_str)
 	len_s = strlen(_str);
 	if (_str[len_s - 1] == '\n')
 		_str[len_s - 1] = '\0';
-}
-
-
-/**
- * cmdline_to_argv - splits a string into individual arguments
- * Desciption: takes a string and returns an array of the individual
- * word strings. It is the responsibility of the caller to memory allocated.
- *
- * @_str: input string
- * @_DELIM: char, character to delimit on
- *
- * Return: Array of strings
- */
-struct _argv_argcount *_strtoargs(char *_str, const char __attribute__((unused)) *_DELIM)
-{
-	char **_argv = NULL, *_tokn;
-	const char *DELIMITER;
-	size_t wcount = 0, _av_bytes = 0; /*tkn_size = 0;*/
-	struct _argv_argcount *_argv_wcount;
-
-	_argv_wcount = malloc(sizeof (struct _argv_argcount));
-
-	if (_str == NULL || strlen(_str) == 0)
-	{
-		printf("Error occured, Invalid Input2.\n");
-		return (NULL);
-	}
-
-	if (_DELIM)
-		DELIMITER = _DELIM;
-	else
-		DELIMITER = " ";
-
-	_tokn = strtok(_str, DELIMITER);
-	while (_tokn != NULL)
-	{
-		_av_bytes = (sizeof(char *) * (wcount + 1));
-		_argv = realloc(_argv, _av_bytes);
-		if (!_argv)
-		{
-			free(_argv);
-			return (NULL);
-		}
-
-		_argv[wcount] = _tokn;
-		wcount++;
-		_tokn = strtok(NULL, DELIMITER);
-	}
-	_argv = realloc(_argv, sizeof(char *) * (wcount + 1));
-	_argv[wcount] = NULL;
-	_argv_wcount->_args = _argv;
-	_argv_wcount->_count = wcount;
-	return (_argv_wcount);
 }
