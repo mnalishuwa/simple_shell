@@ -78,3 +78,14 @@ int _fileno(FILE *stream)
 {
 	return (stream->_fileno);
 }
+
+/**
+ * print_prompt - prints a prompt
+ * Description: print a prompt
+ *
+ * Return: void
+ */
+void print_prompt(void)
+{
+	printf("($) ");
+}
