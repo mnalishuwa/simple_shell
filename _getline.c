@@ -13,7 +13,6 @@
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
 	ssize_t nrd, len_ptr = 0, i = 0;
-	size_t BLK_SIZE = 512;
 	int fdes;
 	char rbuf[BLK_SIZE];
 
@@ -36,7 +35,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 		if ((*n - len_ptr) <= (size_t)nrd)
 		{
 			*n = len_ptr + BLK_SIZE + 1;
-			*lineptr = realloc(*lineptr, sizeof(char) * len_ptr, sizeof(char) * (*n));
+			*lineptr = _realloc(*lineptr, sizeof(char) * len_ptr, sizeof(char) * (*n));
 			if (*lineptr == NULL)
 				return (-1);
 		}
@@ -57,7 +56,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
  * Description: takes a FILE struct pointer and return the file descriptor
  * associated with the file
  *
- * @stream: FILE stream / filename
+ * @stream: filename
  *
  * Return: void
  */
@@ -74,5 +73,6 @@ int _fileno(FILE *stream)
  */
 void print_prompt(void)
 {
-	printf("($) ");
+	printf("$ ");
+	fflush(stdout);
 }

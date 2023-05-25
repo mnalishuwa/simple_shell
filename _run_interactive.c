@@ -13,31 +13,30 @@
 void _run_shell(char **env)
 {
 	char *lineptr, **args, *normalized_line, *command;
-	int status = 0, i = 0;
+	int status = 0, i = 1;
 
-	while (i < 3)
+	while (i)
 	{
 		signal(SIGINT, ctrlc_handler);
 		print_prompt();
 		lineptr = read_line();
-		normalized_line = normalize_wspace(lineptr);
-		args = _strtok(normalized_line);
-		free(normalized_line);
-		command = _search_path(args[0], env);
+		normalized_line = normalize_wspace(lineptr, _strlen(lineptr));
+		args = _strtok(normalized_line, " "); /* free(normalized_line); */
+		if (check_inbuilt(args[0], env) == 0)
+			continue;
+		command = search_path(args[0], env);
 		if (command == NULL)
 		{
 			cmd_not_found(args[0], status, env);
 		}
-		free(args[0]);
-		if (check_inbuilt(command, env) == 0)
-			continue;
+		/* free(args[0]); */
 		args[0] = malloc(sizeof(char) * (_strlen(command) + 1));
 		_strncpy(args[0], command, _strlen(command) + 1);
-		free(command);
+		/* free(command); */
 		status = launch_program(args, env);
-		free(lineptr);
-		free_args(args);
-		i++;
+		/* free(lineptr); */
+		/* free_args(args); */
+		/* i++; */
 	}
 }
 
@@ -53,7 +52,7 @@ void _run_shell(char **env)
 int launch_program(char **args, char **env)
 {
 	int status;
-	pid_t child_pid, wchild_pid;
+	pid_t child_pid, __attribute__((unused)) wchild_pid;
 
 	child_pid = fork();
 	if (child_pid == -1)

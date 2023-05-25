@@ -11,8 +11,10 @@
  */
 void ctrlc_handler(int sig_int)
 {
+	(void)sig_int;
 	signal(SIGINT, ctrlc_handler);
-	_puts("Ctrl-c typed\n");
+	/* _puts("Ctrl-c typed\n"); */
+	_puts("\n");
 	print_prompt();
 }
 
@@ -31,7 +33,7 @@ void eof_handler(int nread, int e_no)
 	/* if get line fails when Ctrl-D is typed */
 	if (nread < 1 && (e_no != ENOMEM || e_no != EINVAL))
 	{
-		_puts("Ctlr-D Handled, exiting gracefully ...\n");
+		/* _puts("Ctlr-D Handled, exiting gracefully ...\n"); */
 		_exit_hsh(EXIT_SUCCESS);
 	}
 }
@@ -47,6 +49,6 @@ void eof_handler(int nread, int e_no)
  */
 void _exit_hsh(int status)
 {
-	_puts("Now exiting\n");
+	/* _puts("Now exiting\n"); */
 	exit(status);
 }

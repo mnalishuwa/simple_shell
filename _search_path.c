@@ -20,7 +20,6 @@ char *search_path(char *command, char **env)
 	struct stat stat_buf;
 
 	pathvalue = _getenv(PATH_VARNAME, env);
-
 	if (pathvalue == NULL)
 	{
 		perror("error: search_path, variable not found\n");

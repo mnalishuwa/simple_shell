@@ -2,6 +2,9 @@
 #define MAIN_H
 
 #define _ASC_SPACES "\t\n\v\f\r \x85\xa0"
+#define ASCII_ZERO 48
+#define NEGATIVE_SIGN 45
+#define BLK_SIZE 512
 
 #include <errno.h>
 #include <fcntl.h>
@@ -16,6 +19,8 @@
 
 /* _putchar - print single char to stdout */
 int _putchar(char c);
+
+void _puts(char *str);
 
 /* cmdline_to_argv - splits string, returns an array of words in the string */
 char **cmdline_to_argv(char *_str);
@@ -44,9 +49,6 @@ int _setenv(const char *name, const char *value, int overwrite);
 /* _unsetenv - deletes the value of an environment variable */
 int _unsetenv(const char *name);
 
-/* search_path - checks if the file executable exists on the PATH */
-char *search_path(char *command, char **env);
-
 void ctrlc_handler(int sig_int);
 
 void eof_handler(int nread, int e_no);
@@ -61,31 +63,24 @@ void _printenv(char **env);
 
 int _strcmp(char *s1, char *s2);
 
-/* get a stream of characters from stdin */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
-/* get the file descriptor from a FILE stream */
 int _fileno(FILE *stream);
 
-/* remove excess whitespace */
 char *normalize_wspace(char *_str, size_t len_s);
 
-/* tokenize string and return an array of words from the string */
 char **_strtok(char *_str, const char *_delim);
 
-/* find substring in string */
+char **_strtok(char *_str, const char *_delim);
+
 char *_strstr(char *haystack, char *needle);
 
-/* copy string from source upto max n bytes */
 char *_strncpy(char *dest, char *src, size_t n);
 
-/* allocate new_sized ptr and copy contents of old into new ptr */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
-/* get null terminated string length */
 int _strlen(char *s);
 
-/* delete trailing whitespace */
 void del_twspace(char *s);
 
 int is_pathbased(char *command);
@@ -96,14 +91,14 @@ void create_path(char *dest, char *s1, char *s2);
 
 void free_args(char **args);
 
-int _pow_recursion(int x, int y);
-
-void print_number(int n);
-
-void _puts(char *str);
-
 void _run_shell(char **env);
 
 int launch_program(char **args, char **env);
+
+void print_number(int n);
+
+int _pow_recursion(int x, int y);
+
+void cmd_not_found(char *command, int num, char **env);
 
 #endif

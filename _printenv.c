@@ -15,7 +15,8 @@ void _printenv(char **env)
 
 	while (env[i] != NULL)
 	{
-		puts(env[i]);
+		_puts(env[i]);
+		_puts("\n");
 		i++;
 	}
 

@@ -8,7 +8,6 @@
  *
  * Return: a pointer to the string entered by the user
  */
-
 char *read_line(void)
 {
 	char *_lineptr = NULL;
@@ -16,15 +15,15 @@ char *read_line(void)
 	size_t len = 0;
 
 	nread = _getline(&_lineptr, &len, stdin);
-	eof_handler(n_read, errno);
+	eof_handler(nread, errno);
 
-	if (n_read == -1 && (errno == ENOMEM || errno == EINVAL))
+	if (nread == -1 && (errno == ENOMEM || errno == EINVAL))
 	{
 		perror("error: read_line failed:");
 		return (NULL);
 	}
-	if (_lineptr[n_read - 1] == '\n')
-		_lineptr[n_read - 1] = '\0';
+	if (_lineptr[nread - 1] == '\n')
+		_lineptr[nread - 1] = '\0';
 
 	return (_lineptr);
 }
