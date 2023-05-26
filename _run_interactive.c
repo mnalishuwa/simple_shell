@@ -12,31 +12,42 @@
  */
 void _run_shell(char **env)
 {
-	char *lineptr, **args, *normalized_line, *command;
-	int status = 0, i = 1;
+	char *lineptr, **args, __attribute__((unused))*normalized_line, *command;
+	int status = 0, i = 0;
 
-	while (i)
+	while (1)
 	{
 		signal(SIGINT, ctrlc_handler);
 		print_prompt();
 		lineptr = read_line();
-		normalized_line = normalize_wspace(lineptr, _strlen(lineptr));
-		args = _strtok(normalized_line, " "); /* free(normalized_line); */
-		if (check_inbuilt(args[0], env) == 0)
+		/* normalized_line = normalize_wspace(lineptr, _strlen(lineptr)); */
+		/* re-prompt is nothing was entered*/
+		if (lineptr[0] == '\0' || lineptr[0] == '\n')
 			continue;
+		normalize_wspace2(lineptr);
+		if (_strlen(lineptr) == 0)
+			continue;
+		args = _strtok(lineptr, " "); /* free(normalized_line); */
+		if (check_inbuilt(args[0], args, env) == 0)
+		{
+			/* free(lineptr); */
+			/* free_args(args); */
+			continue;
+		}
 		command = search_path(args[0], env);
 		if (command == NULL)
 		{
 			cmd_not_found(args[0], status, env);
+			/* free(lineptr); */
+			/* free_args(args); */
+			continue;
 		}
-		/* free(args[0]); */
-		args[0] = malloc(sizeof(char) * (_strlen(command) + 1));
+		args[0] = _realloc(args[0], 0, sizeof(char) * (_strlen(command) + 1));
 		_strncpy(args[0], command, _strlen(command) + 1);
-		/* free(command); */
 		status = launch_program(args, env);
 		/* free(lineptr); */
 		/* free_args(args); */
-		/* i++; */
+		i++;
 	}
 }
 

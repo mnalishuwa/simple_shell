@@ -15,7 +15,7 @@ char *read_line(void)
 	size_t len = 0;
 
 	nread = _getline(&_lineptr, &len, stdin);
-	eof_handler(nread, errno);
+	eof_handler(nread, errno, _lineptr);
 
 	if (nread == -1 && (errno == ENOMEM || errno == EINVAL))
 	{

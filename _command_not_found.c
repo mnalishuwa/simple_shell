@@ -13,15 +13,18 @@
  */
 void cmd_not_found(char *command, int num, char **env)
 {
+
 	char *exe_name;
+	(void)num;
 
 	exe_name = _getenv("_", env);
 
 	_puts(exe_name);
 	_puts(": ");
-	print_number(num);
-	_puts(": ");
+	/* print_number(num); */
+	/* _puts(": "); */
 	_puts(command);
 	_puts(": ");
 	_puts("not found\n");
+	free(exe_name);
 }

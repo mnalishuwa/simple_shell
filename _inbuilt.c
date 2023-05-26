@@ -7,10 +7,11 @@
  *
  * @command: str, user command
  * @env: environment pointer
+ * @args: arguments array
  *
  * Return: value
  */
-int check_inbuilt(char *command, char **env)
+int check_inbuilt(char *command, char **args, char **env)
 {
 	size_t i;
 
@@ -27,7 +28,9 @@ int check_inbuilt(char *command, char **env)
 			}
 			if (i == 1)
 			{
-				_exit_hsh(EXIT_SUCCESS);
+				if (args[1])
+					_exit_hsh(command, args, _atoi(args[1]));
+				_exit_hsh(command, args, EXIT_SUCCESS);
 				return (0);
 			}
 		}

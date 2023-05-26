@@ -44,20 +44,24 @@ void print_path(void);
 char *_getenv(const char *name, char **env);
 
 /* _setenv - sets the value of an environment variable */
-int _setenv(const char *name, const char *value, int overwrite);
+/* int _setenv(const char *name, const char *value, int overwrite); */
+int _setenv(const char *name, const char *value, int overwrite, char **env);
 
 /* _unsetenv - deletes the value of an environment variable */
 int _unsetenv(const char *name);
 
 void ctrlc_handler(int sig_int);
 
-void eof_handler(int nread, int e_no);
+/* void eof_handler(int nread, int e_no); */
+void eof_handler(int nread, int e_no, char *lineptr);
 
-void _exit_hsh(int status);
+/* void _exit_hsh(int status); */
+void _exit_hsh(char *lineptr, char **args, int status);
 
 void rm_linefeed(char *_str);
 
-int check_inbuilt(char *command, char **env);
+/* int check_inbuilt(char *command, char **env); */
+int check_inbuilt(char *command, char **args, char **env);
 
 void _printenv(char **env);
 
@@ -100,5 +104,11 @@ void print_number(int n);
 int _pow_recursion(int x, int y);
 
 void cmd_not_found(char *command, int num, char **env);
+
+void normalize_wspace2(char *_str);
+
+void create_path2(char *dest, char *s1, char *s2, char sep);
+
+int _atoi(char *s);
 
 #endif

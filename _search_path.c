@@ -20,25 +20,26 @@ char *search_path(char *command, char **env)
 	struct stat stat_buf;
 
 	pathvalue = _getenv(PATH_VARNAME, env);
-	if (pathvalue == NULL)
+	if (pathvalue == NULL || command == NULL || _strlen(command) == 0)
 	{
-		perror("error: search_path, variable not found\n");
+		free(pathvalue);
+		pathvalue = NULL;
 		return (NULL);
 	}
-	if (command == NULL || _strlen(command) == 0)
-		return (NULL);
-
 	clen = _strlen(command);
 	if (is_pathbased(command) == 1)
 	{
 		if (stat(command, &stat_buf) == 0)
+		{
+			free(pathvalue);
+			pathvalue = NULL;
 			return (command);
+		}
 		return (NULL);
 	}
-
 	pathdirs = _strtok(pathvalue, ":");
-	free(pathvalue);
-	/* rm_linefeed(command); */
+	/* free(pathvalue); */
+	/* pathvalue = NULL; */
 	for (i = 0; pathdirs[i] != NULL; i++)
 	{
 		dir_len = _strlen(pathdirs[i]);
@@ -75,9 +76,12 @@ void free_args(char **args)
 
 	for (i = 0; args[i] != NULL; i++)
 	{
-		free(args[i]);
+		if (args != NULL)
+			free(args[i]);
+		args[i] = NULL;
 	}
 	free(args);
+	args = NULL;
 }
 
 /**

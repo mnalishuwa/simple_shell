@@ -15,7 +15,7 @@ int _strlen(char *s)
 
 	if (s == NULL)
 	{
-		perror("error: _strlen passed null pointer");
+		/* perror("error: _strlen passed null pointer"); */
 		return (-1);
 	}
 

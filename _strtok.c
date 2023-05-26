@@ -26,7 +26,6 @@ char **_strtok(char *_str, const char *_delim)
 	end = _str; /* pointer to hold end of token */
 	dlength = _strlen((char *)_delim); /* delimiter length */
 	slength = _strlen(_str);
-
 	dptr = _strstr(begin, (char *)_delim); /* match first token */
 	while (dptr != NULL)
 	{
@@ -51,8 +50,48 @@ char **_strtok(char *_str, const char *_delim)
 	wcnt++;
 	args = _realloc(args, sizeof(char *) * wcnt, sizeof(char *) * (wcnt + 1));
 	args[wcnt] = NULL;
-
+	free(_str);
+	_str = NULL;
 	return (args);
+}
+
+/**
+ * normalize_wspace2 - removes all extra spaces from a string
+ * Description: takes a string and removes any extra, or
+ * consecutive spaces from the string in place
+ *
+ * @_str: string arg
+ *
+ * Return: string
+ */
+void normalize_wspace2(char *_str)
+{
+	size_t i = 0, j = 0;
+
+	for (i = 0, j = 0; _str[i] != '\0'; j++, i++)
+	{
+		if (_str[i] == ' ' || _str[i] == '\t' || _str[i] == '\v')
+		{/* if whitespace is matched */
+			if (i != 0)
+			{/*only copy a single ' ' to normalized string*/
+				_str[j] = ' ';
+				i++;
+				j++;
+			}
+			while (_str[i] == ' ' || _str[i] == '\t' || _str[i] == '\v')
+			{/* loop through and ignore all other spaces*/
+				i++;
+			}
+			if (_str[i] == '\0')
+			{
+				_str[j] = '\0';
+				break;
+			}
+		}
+		_str[j] = _str[i]; /*copy non-whitespace char to normalized string */
+	}
+	_str[j] = '\0';
+	del_twspace(_str);
 }
 
 /**
@@ -86,6 +125,12 @@ char *normalize_wspace(char *_str, size_t len_s)
 			{/* loop through and ignore all other spaces*/
 				i++;
 			}
+			if (_str[i] == '\0')
+			{
+				_str[j] = '\0';
+				break;
+			}
+
 		}
 		cln_str[j] = _str[i]; /*copy non-whitespace char to normalized string*/
 	}
