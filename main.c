@@ -21,7 +21,7 @@ int main(int argc, char **argv, char **env)
 	}
 	else
 	{
-
+		_non_interactive(env);
 	}
 
 	return (0);

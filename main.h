@@ -111,4 +111,6 @@ void create_path2(char *dest, char *s1, char *s2, char sep);
 
 int _atoi(char *s);
 
+void _non_interactive(char **env);
+
 #endif
