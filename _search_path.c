@@ -38,8 +38,6 @@ char *search_path(char *command, char **env)
 		return (NULL);
 	}
 	pathdirs = _strtok(pathvalue, ":");
-	/* free(pathvalue); */
-	/* pathvalue = NULL; */
 	for (i = 0; pathdirs[i] != NULL; i++)
 	{
 		dir_len = _strlen(pathdirs[i]);
@@ -52,6 +50,7 @@ char *search_path(char *command, char **env)
 		}
 	}
 	free(full_cpath);
+	full_cpath = NULL;
 	free_args(pathdirs);
 	return (NULL);
 }

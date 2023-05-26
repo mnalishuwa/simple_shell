@@ -8,10 +8,11 @@
  * @command: str / command entry
  * @num: int, command number
  * @env: pointer to environment array
+ * @args: arguments array
  *
  * Return: void
  */
-void cmd_not_found(char *command, int num, char **env)
+void cmd_not_found(char *command, char **args, int num, char **env)
 {
 
 	char *exe_name;
@@ -27,4 +28,5 @@ void cmd_not_found(char *command, int num, char **env)
 	_puts(": ");
 	_puts("not found\n");
 	free(exe_name);
+	free_args(args);
 }

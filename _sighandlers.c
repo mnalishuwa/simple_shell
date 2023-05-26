@@ -14,7 +14,6 @@ void ctrlc_handler(int sig_int)
 	(void)sig_int;
 	signal(SIGINT, ctrlc_handler);
 	/* _puts("Ctrl-c typed\n"); */
-	_puts("\n");
 	print_prompt();
 }
 
@@ -35,6 +34,7 @@ void eof_handler(int nread, int e_no, char *lineptr)
 	if (nread < 1 && (e_no != ENOMEM || e_no != EINVAL))
 	{
 		/* _puts("Ctlr-D Handled, exiting gracefully ...\n"); */
+		_puts("\n");
 		_exit_hsh(lineptr, NULL, EXIT_SUCCESS);
 	}
 }

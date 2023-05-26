@@ -103,7 +103,8 @@ void print_number(int n);
 
 int _pow_recursion(int x, int y);
 
-void cmd_not_found(char *command, int num, char **env);
+/* void cmd_not_found(char *command, int num, char **env); */
+void cmd_not_found(char *command, char **args, int num, char **env);
 
 void normalize_wspace2(char *_str);
 

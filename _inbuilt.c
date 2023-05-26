@@ -24,6 +24,7 @@ int check_inbuilt(char *command, char **args, char **env)
 			if (i == 0)
 			{
 				_printenv(env);
+				free_args(args);
 				return (0);
 			}
 			if (i == 1)
