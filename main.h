@@ -114,4 +114,8 @@ int _atoi(char *s);
 
 void _non_interactive(char **env);
 
+char *_strdup(char *str);
+
+int _cd_home(char *path, char **env);
+
 #endif
