@@ -17,9 +17,9 @@ char *read_line(void)
 	nread = _getline(&_lineptr, &len, stdin);
 	eof_handler(nread, errno, _lineptr);
 
-	if (nread == -1 && (errno == ENOMEM || errno == EINVAL))
+	if (nread == -1)
 	{
-		perror("error: read_line failed:");
+		free(_lineptr);
 		return (NULL);
 	}
 	if (_lineptr[nread - 1] == '\n')

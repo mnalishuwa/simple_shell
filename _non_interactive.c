@@ -10,29 +10,48 @@
 */
 void _non_interactive(char **env)
 {
-	char *lineptr, **args, *command;
-	int status = 0;
+	char *lineptr = NULL, **args, *command, **rlines = NULL;
+	int nrd = 0, i = 0, status = 0;
+	char *rbuf = malloc(sizeof(char) * BLK_SIZE);
 
-	lineptr = read_line();
-	normalize_wspace2(lineptr);
-	args = _strtok(lineptr, " ");
-	if (check_inbuilt(args[0], args, env) == 0)
-		_exit_hsh(args[0], args, EXIT_SUCCESS);
-	command = search_path(args[0], env);
-	if (command == NULL)
+	_memset(rbuf, '\0', BLK_SIZE);
+	while ((nrd = read(STDIN_FILENO, rbuf, BLK_SIZE)) > 0)
 	{
-		cmd_not_found(args[0], args, status, env);
-		_exit_hsh(command, args, EXIT_SUCCESS);
+		rlines = _strtok(rbuf, "\n");
+		while (rlines[i] != NULL)
+		{
+			lineptr = _strdup(rlines[i]);
+			normalize_wspace2(lineptr);
+			args = _strtok(lineptr, " ");
+			if (check_inbuilt(args[0], args, env) == 0)
+			{
+				i++;
+				continue;
+			}
+			command = search_path(args[0], env);
+			if (command == NULL)
+			{
+				cmd_not_found(args[0], args, status, env);
+				i++;
+				continue;
+			}
+			if (_strcmp(command, args[0]) == 0)
+			{
+				status = launch_program(args, env);
+				free_args(args);
+				i++;
+				continue;
+			}
+			args[0] = _realloc(args[0], 0, sizeof(char) * (_strlen(command) + 1));
+			_strncpy(args[0], command, _strlen(command) + 1);
+			free(command);
+			command = NULL;
+			status = launch_program(args, env);
+			free_args(args);
+			i++;
+		}
+		free_args(rlines);
+		rbuf = malloc(sizeof(char) * BLK_SIZE);
 	}
-	if (_strcmp(command, args[0]) == 0)
-	{
-		status = launch_program(args, env);
-		_exit_hsh(command, args, EXIT_SUCCESS);
-	}
-	args[0] = _realloc(args[0], 0, sizeof(char) * (_strlen(command) + 1));
-	_strncpy(args[0], command, _strlen(command) + 1);
-	free(command);
-	command = NULL;
-	status = launch_program(args, env);
-	_exit_hsh(command, args, EXIT_SUCCESS);
+	free(rbuf);
 }

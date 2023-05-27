@@ -121,4 +121,6 @@ char *_strdup(char *str);
 
 int _cd_home(char *path, char **env);
 
+char *_memset(char *s, char b, unsigned int n);
+
 #endif
