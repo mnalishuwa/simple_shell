@@ -8,6 +8,7 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <limits.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -113,6 +114,8 @@ void create_path2(char *dest, char *s1, char *s2, char sep);
 int _atoi(char *s);
 
 void _non_interactive(char **env);
+
+int check_inbuilt(char *command, char **args, char **env);
 
 char *_strdup(char *str);
 

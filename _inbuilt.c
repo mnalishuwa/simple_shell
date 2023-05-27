@@ -34,6 +34,12 @@ int check_inbuilt(char *command, char **args, char **env)
 				_exit_hsh(command, args, EXIT_SUCCESS);
 				return (0);
 			}
+			if (i == 3)
+			{
+				_cd_home(args[1], env);
+				free_args(args);
+				return (0);
+			}
 		}
 	}
 	return (1);

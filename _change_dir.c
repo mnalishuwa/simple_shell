@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * _cd_home - changes directory
+ * _cd - changes directory
  * Description: changes directory to specified file path
  *
- * @path: directory
+ * @dir: directory
  * @env: environment pointer
  *
- * Return: int
+ * Return:
 */
 int _cd_home(char *path, char **env)
 {
@@ -41,5 +41,5 @@ int _cd_home(char *path, char **env)
 	}
 	free(fpath);
 	free(wdir);
-	return (status);
+	return(status);
 }
