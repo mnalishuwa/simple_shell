@@ -19,6 +19,8 @@ char *search_path(char *command, char **env)
 	const char *PATH_VARNAME = "PATH";
 	struct stat stat_buf;
 
+	if (command && stat(command, &stat_buf) == 0)
+		return (command);
 	pathvalue = _getenv(PATH_VARNAME, env);
 	if (pathvalue == NULL || command == NULL || _strlen(command) == 0)
 	{
