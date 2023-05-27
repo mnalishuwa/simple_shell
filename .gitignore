@@ -4,3 +4,5 @@
 *#
 main.out
 [0-9]*.c
+tests
+.bash

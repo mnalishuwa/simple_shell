@@ -34,7 +34,12 @@ void eof_handler(int nread, int e_no, char *lineptr)
 	if (nread < 1 && (e_no != ENOMEM || e_no != EINVAL))
 	{
 		/* _puts("Ctlr-D Handled, exiting gracefully ...\n"); */
-		_puts("\n");
+		/* _puts("\n"); */
+		if (lineptr)
+		{
+			free(lineptr);
+			lineptr = NULL;
+		}
 		_exit_hsh(lineptr, NULL, EXIT_SUCCESS);
 	}
 }

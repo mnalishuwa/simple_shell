@@ -15,14 +15,7 @@ int main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 
-	if (isatty(STDIN_FILENO))
-	{
-		_run_shell(env);
-	}
-	else
-	{
-		_non_interactive(env);
-	}
+	_run_shell(env);
 
 	return (0);
 }

@@ -13,18 +13,28 @@
 void _run_shell(char **env)
 {
 	char *lineptr, **args, __attribute__((unused))*normalized_line, *command;
-	int status = 0, i = 0;
+	int __attribute__((unused)) status = 0, i = 0;
 
+	signal(SIGINT, ctrlc_handler);
 	while (1)
 	{
-		signal(SIGINT, ctrlc_handler);
-		print_prompt();
+		i++;
+		if (isatty(STDIN_FILENO))
+			print_prompt();
 		lineptr = read_line();
 		if (_strlen(lineptr) == 0 || lineptr[0] == '\0' || lineptr[0] == '\n')
+		{
+			free(lineptr);
+			lineptr = NULL;
 			continue;
+		}
 		normalize_wspace2(lineptr);
 		if (_strlen(lineptr) == 0)
+		{
+			free(lineptr);
+			lineptr = NULL;
 			continue;
+		}
 		args = _strtok(lineptr, " "); /* free(normalized_line); */
 		if (check_inbuilt(args[0], args, env) == 0)
 		{
@@ -34,7 +44,7 @@ void _run_shell(char **env)
 		command = search_path(args[0], env);
 		if (command == NULL)
 		{/* free_args(args); */
-			cmd_not_found(args[0], args, status, env);
+			cmd_not_found(args[0], args, i, env);
 			continue;
 		}
 		if (_strcmp(command, args[0]) == 0)
@@ -49,7 +59,6 @@ void _run_shell(char **env)
 		command = NULL;
 		status = launch_program(args, env);
 		free_args(args);
-		i++;
 	}
 }
 

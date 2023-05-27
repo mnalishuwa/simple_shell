@@ -22,8 +22,8 @@ void cmd_not_found(char *command, char **args, int num, char **env)
 
 	_puts(exe_name);
 	_puts(": ");
-	/* print_number(num); */
-	/* _puts(": "); */
+	print_number(num);
+	_puts(": ");
 	_puts(command);
 	_puts(": ");
 	_puts("not found\n");
