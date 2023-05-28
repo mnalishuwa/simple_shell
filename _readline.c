@@ -14,7 +14,7 @@ char *read_line(void)
 	ssize_t nread;
 	size_t len = 0;
 
-	nread = getline(&_lineptr, &len, stdin);
+	nread = _getline(&_lineptr, &len, stdin);
 	eof_handler(nread, errno, _lineptr);
 
 	if (nread == -1)
