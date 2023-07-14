@@ -16,6 +16,7 @@
  * match, 0 otherwise
  */
 
+
 int _strcmp(char *s1, char *s2)
 {
 
@@ -33,5 +34,11 @@ int _strcmp(char *s1, char *s2)
 			return (*(s1 + char_pos) - *(s2 + char_pos));
 	}
 
+	if (len_s1 != len_s2)
+	{
+		if (len_s1 > len_s2)
+			return (1);
+		return (-1);
+	}
 	return (0);
 }
