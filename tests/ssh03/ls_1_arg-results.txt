@@ -1,0 +1,128 @@
+(command)[echo "ls -l" | ../hsh.out]
+
+[GOT]:
+(stdout)[total 165
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3042 May 29 08:55 bin_ls.bash
+-rwxrwxrwx 1 vagrant vagrant  5646 Jun 14 14:29 bin_ls_1_arg-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3048 May 29 08:55 bin_ls_1_arg.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_1_arg_1-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3052 May 29 08:55 bin_ls_1_arg_1.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_3_times-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3066 May 29 08:55 bin_ls_3_times.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_empty_path-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3141 May 29 08:55 bin_ls_empty_path.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_large_input-results.txt
+-rwxrwxrwx 1 vagrant vagrant  9304 May 29 08:55 bin_ls_large_input.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_medium_input-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3550 May 29 08:55 bin_ls_medium_input.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_spaces-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3110 May 29 08:55 bin_ls_spaces.bash
+-rwxrwxrwx 1 vagrant vagrant 13315 May 29 08:55 checker.bash
+-rwxrwxrwx 1 vagrant vagrant   910 Jun 14 14:29 empty_path_failing_cmd-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3157 May 29 08:55 empty_path_failing_cmd.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 env_ignore_bin_ls-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3291 May 29 08:55 env_ignore_bin_ls.bash
+-rwxrwxrwx 1 vagrant vagrant   253 Jun 14 14:29 env_ignore_ls-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3431 May 29 08:55 env_ignore_ls.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 ls_-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3032 May 29 08:55 ls_.bash
+-rw-rw-rw- 1 vagrant vagrant     0 Jun 14 14:29 ls_1_arg-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3038 May 29 08:55 ls_1_arg.bash
+-rwxrwxrwx 1 vagrant vagrant  3262 May 29 08:55 ls_dot_ls.bash
+-rwxrwxrwx 1 vagrant vagrant  3126 May 29 08:55 ls_empty_path.bash
+-rwxrwxrwx 1 vagrant vagrant  3177 May 29 08:55 ls_in_current_dir.bash
+-rwxrwxrwx 1 vagrant vagrant  3184 May 29 08:55 ls_in_parent_dir.bash
+-rwxrwxrwx 1 vagrant vagrant  3205 May 29 08:55 ls_in_two_parent_dir.bash
+-rwxrwxrwx 1 vagrant vagrant  3213 May 29 08:55 ls_in_two_parent_dir_2.bash
+-rwxrwxrwx 1 vagrant vagrant  3229 May 29 08:55 ls_in_two_parent_dir_3.bash
+-rwxrwxrwx 1 vagrant vagrant  3216 May 29 08:55 ls_path_bin_first.bash
+-rwxrwxrwx 1 vagrant vagrant  3215 May 29 08:55 ls_path_bin_last.bash
+-rwxrwxrwx 1 vagrant vagrant  3212 May 29 08:55 ls_path_bin_middle.bash
+-rwxrwxrwx 1 vagrant vagrant  3204 May 29 08:55 ls_path_no_bin.bash
+-rwxrwxrwx 1 vagrant vagrant  3095 May 29 08:55 ls_spaces.bash
+-rwxrwxrwx 1 vagrant vagrant  3097 May 29 08:55 mix_ls_bin_ls.bash
+-rwxrwxrwx 1 vagrant vagrant  3147 May 29 08:55 mix_ls_bin_ls_spaces.bash
+-rwxrwxrwx 1 vagrant vagrant  3258 May 29 08:55 path_current_dir_ls.bash
+-rwxrwxrwx 1 vagrant vagrant  3218 May 29 08:55 path_path1_var.bash
+-rw-rw-rw- 1 vagrant vagrant   655 Jun 14 12:25 run_tests.bash
+-rwxrwxrwx 1 vagrant vagrant  3363 May 29 08:55 unknown_command_no_fork.bash
+](Length: 3181)
+(stderr)[](Length: 0)
+(status)[0]
+
+[EXPECTED]:
+(stdout)[total 165
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3042 May 29 08:55 bin_ls.bash
+-rwxrwxrwx 1 vagrant vagrant  5646 Jun 14 14:29 bin_ls_1_arg-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3048 May 29 08:55 bin_ls_1_arg.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_1_arg_1-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3052 May 29 08:55 bin_ls_1_arg_1.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_3_times-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3066 May 29 08:55 bin_ls_3_times.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_empty_path-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3141 May 29 08:55 bin_ls_empty_path.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_large_input-results.txt
+-rwxrwxrwx 1 vagrant vagrant  9304 May 29 08:55 bin_ls_large_input.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_medium_input-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3550 May 29 08:55 bin_ls_medium_input.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 bin_ls_spaces-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3110 May 29 08:55 bin_ls_spaces.bash
+-rw-rw-rw- 1 vagrant vagrant 13315 May 29 08:55 checker.bash
+-rwxrwxrwx 1 vagrant vagrant   910 Jun 14 14:29 empty_path_failing_cmd-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3157 May 29 08:55 empty_path_failing_cmd.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 env_ignore_bin_ls-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3291 May 29 08:55 env_ignore_bin_ls.bash
+-rwxrwxrwx 1 vagrant vagrant   253 Jun 14 14:29 env_ignore_ls-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3431 May 29 08:55 env_ignore_ls.bash
+-rwxrwxrwx 1 vagrant vagrant     2 Jun 14 14:29 ls_-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3032 May 29 08:55 ls_.bash
+-rw-rw-rw- 1 vagrant vagrant     0 Jun 14 14:29 ls_1_arg-results.txt
+-rwxrwxrwx 1 vagrant vagrant  3038 May 29 08:55 ls_1_arg.bash
+-rwxrwxrwx 1 vagrant vagrant  3262 May 29 08:55 ls_dot_ls.bash
+-rwxrwxrwx 1 vagrant vagrant  3126 May 29 08:55 ls_empty_path.bash
+-rwxrwxrwx 1 vagrant vagrant  3177 May 29 08:55 ls_in_current_dir.bash
+-rwxrwxrwx 1 vagrant vagrant  3184 May 29 08:55 ls_in_parent_dir.bash
+-rwxrwxrwx 1 vagrant vagrant  3205 May 29 08:55 ls_in_two_parent_dir.bash
+-rwxrwxrwx 1 vagrant vagrant  3213 May 29 08:55 ls_in_two_parent_dir_2.bash
+-rwxrwxrwx 1 vagrant vagrant  3229 May 29 08:55 ls_in_two_parent_dir_3.bash
+-rwxrwxrwx 1 vagrant vagrant  3216 May 29 08:55 ls_path_bin_first.bash
+-rwxrwxrwx 1 vagrant vagrant  3215 May 29 08:55 ls_path_bin_last.bash
+-rwxrwxrwx 1 vagrant vagrant  3212 May 29 08:55 ls_path_bin_middle.bash
+-rwxrwxrwx 1 vagrant vagrant  3204 May 29 08:55 ls_path_no_bin.bash
+-rwxrwxrwx 1 vagrant vagrant  3095 May 29 08:55 ls_spaces.bash
+-rwxrwxrwx 1 vagrant vagrant  3097 May 29 08:55 mix_ls_bin_ls.bash
+-rwxrwxrwx 1 vagrant vagrant  3147 May 29 08:55 mix_ls_bin_ls_spaces.bash
+-rwxrwxrwx 1 vagrant vagrant  3258 May 29 08:55 path_current_dir_ls.bash
+-rwxrwxrwx 1 vagrant vagrant  3218 May 29 08:55 path_path1_var.bash
+-rw-rw-rw- 1 vagrant vagrant   655 Jun 14 12:25 run_tests.bash
+-rwxrwxrwx 1 vagrant vagrant  3363 May 29 08:55 unknown_command_no_fork.bash
+](Length: 3181)
+(stderr)[](Length: 0)
+(status)[0]
+
+Environment:
+SHELL=/bin/bash
+PWD=/home/vagrant/shared/alx/se2023/foundations/simple_shell/tests/ssh03
+LOGNAME=vagrant
+XDG_SESSION_TYPE=tty
+MOTD_SHOWN=pam
+HOME=/home/vagrant
+LANG=C.UTF-8
+SSH_CONNECTION=10.0.2.2 60430 10.0.2.15 22
+LESSCLOSE=/usr/bin/lesspipe %s %s
+XDG_SESSION_CLASS=user
+TERM=xterm
+LESSOPEN=| /usr/bin/lesspipe %s
+USER=vagrant
+SHLVL=3
+XDG_SESSION_ID=3
+XDG_RUNTIME_DIR=/run/user/1000
+SSH_CLIENT=10.0.2.2 60430 22
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+SSH_TTY=/dev/pts/0
+OLDPWD=/home/vagrant/shared/alx/se2023/foundations/simple_shell/tests/ssh02
+_=/usr/bin/env

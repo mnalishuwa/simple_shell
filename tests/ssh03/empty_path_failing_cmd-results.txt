@@ -1,0 +1,38 @@
+(command)[echo "hbtn_cmd" | ../hsh.out]
+
+[GOT]:
+(stdout)[../hsh.out: 1: hbtn_cmd: not found
+](Length: 35)
+(stderr)[](Length: 0)
+(status)[0]
+
+[EXPECTED]:
+(stdout)[](Length: 0)
+(stderr)[../hsh.out: 1: hbtn_cmd: not found
+](Length: 35)
+(status)[127]
+
+Environment:
+SHELL=/bin/bash
+PWD=/home/vagrant/shared/alx/se2023/foundations/simple_shell/tests/ssh03
+LOGNAME=vagrant
+XDG_SESSION_TYPE=tty
+MOTD_SHOWN=pam
+HOME=/home/vagrant
+LANG=C.UTF-8
+SSH_CONNECTION=10.0.2.2 60430 10.0.2.15 22
+LESSCLOSE=/usr/bin/lesspipe %s %s
+XDG_SESSION_CLASS=user
+TERM=xterm
+LESSOPEN=| /usr/bin/lesspipe %s
+USER=vagrant
+SHLVL=3
+XDG_SESSION_ID=3
+XDG_RUNTIME_DIR=/run/user/1000
+SSH_CLIENT=10.0.2.2 60430 22
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+PATH=
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+SSH_TTY=/dev/pts/0
+OLDPWD=/home/vagrant/shared/alx/se2023/foundations/simple_shell/tests/ssh02
+_=/usr/bin/env
