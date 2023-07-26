@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _setenv_ls - sets an environment variable
+ * _setenv - sets an environment variable
  * Description: sets an environment variable
  *
  * @name: var name
@@ -28,7 +28,6 @@ int _setenv(char *name, char *value, int overwrite, enode *env)
 		{
 			if (overwrite == 0)
 				return (0);
-/* current_node->value = _realloc(current_node->value, 0, _strlen(value) + 1);*/
 			free(current_node->value);
 			current_node->value = NULL;
 			current_node->value = _strdup(value);
@@ -47,7 +46,7 @@ int _setenv(char *name, char *value, int overwrite, enode *env)
 }
 
 /**
- * create_path - concatenates 2 strings into specified destination
+ * create_path2 - concatenates 2 strings into specified destination
  * Description: concats 2 strings separated by a / to specified
  * destination, this is used to create a full filepath given
  * a directory and a command, it is a utility function used

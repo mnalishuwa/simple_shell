@@ -6,6 +6,8 @@
  * using getline function. it is the responsibility of
  * the caller to free the memory allocated.
  *
+ * @env: pointer to env variables linked list
+ *
  * Return: a pointer to the string entered by the user
  */
 char *read_line(enode *env)

@@ -13,34 +13,28 @@
 void _run_shell(enode *env)
 {
 	char *lineptr, **args, __attribute__((unused))*normalized_line, *command;
-	int __attribute__((unused)) status = 0, i = 0;
 
+	int __attribute__((unused)) status = 0, i = 0;
 	signal(SIGINT, ctrlc_handler);
-	while (1)
+	for (; ; i++)
 	{
-		i++;
 		if (isatty(STDIN_FILENO))
 			print_prompt();
 		lineptr = read_line(env);
 		if (_strlen(lineptr) == 0 || lineptr[0] == '\0' || lineptr[0] == '\n')
 		{
-			free(lineptr);
-			lineptr = NULL;
+			free_null(lineptr); /* lineptr = NULL; */
 			continue;
 		}
 		normalize_wspace2(lineptr);
 		if (_strlen(lineptr) == 0)
 		{
-			free(lineptr);
-			lineptr = NULL;
+			free_null(lineptr); /* lineptr = NULL; */
 			continue;
 		}
 		args = _strtok(lineptr, " "); /* free(normalized_line); */
 		if (check_inbuilt(args[0], args, env) == 0)
-		{
-/* free_args(args); */
 			continue;
-		}
 		command = search_path(args[0], env);
 		if (command == NULL)
 		{/* free_args(args); */
@@ -53,14 +47,28 @@ void _run_shell(enode *env)
 			free_args(args);
 			continue;
 		}
-		args[0] = _realloc(args[0], 0, sizeof(char) * (_strlen(command) + 1));
-		_strncpy(args[0], command, _strlen(command) + 1);
-		free(command);
-		command = NULL;
+		launch_prep(args, command);
 		status = launch_program(args, env);
 		free_args(args);
 	}
 	free_list(&env);
+}
+
+/**
+ * launch_prep - prep args for execution
+ * Description: prep args for execution
+ *
+ * @args: string args array
+ * @command: string command
+ *
+ * Return: void
+ */
+
+void launch_prep(char **args, char *command)
+{
+	args[0] = _realloc(args[0], 0, sizeof(char) * (_strlen(command) + 1));
+	_strncpy(args[0], command, _strlen(command) + 1);
+	free_null(command);
 }
 
 /**
@@ -88,7 +96,7 @@ int launch_program(char **args, enode *env)
 	if (child_pid == 0)
 	{
 /* if (execve(args[0], args, env) == -1) */
-/**
+/*
  * NB: passing NULL to execve makes the new program inherit
  * the env of the calling process
  */

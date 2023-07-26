@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * printenv_ls2 - prints all environment variables in linked list
+ * _printenv - prints all environment variables in linked list
  * Description: prints the env variables
  *
  * @head: pointer to start of the list

@@ -21,16 +21,18 @@
 #include <unistd.h>
 
 /**
- * env_linkedlist_node - type definition for env variable node
+ * struct env_linkedlist_node - type definition for env variable node
  * @name: string variable name
  * @value: string vvariable value
+ * @next_node: pointer to next node
  *
  * Description: defines a node for an env variable
-*/
-typedef struct env_linkedlist_node {
-    char *name;
-    char *value;
-    struct env_linkedlist_node *next_node;
+ */
+typedef struct env_linkedlist_node
+{
+	char *name;
+	char *value;
+	struct env_linkedlist_node *next_node;
 } enode;
 
 typedef struct env_liskedlist_node *env_linkedlist_ptr;
@@ -64,7 +66,6 @@ char *_getenv(const char *vname, enode *env);
 
 /* _setenv - sets the value of an environment variable */
 /* int _setenv(const char *name, const char *value, int overwrite); */
-/* int _setenv(const char *name, const char *value, int overwrite, char **env); */
 int _setenv(char *name, char *value, int overwrite, enode *env);
 
 /* _unsetenv - deletes the value of an environment variable */
@@ -173,6 +174,8 @@ int _size_envlist(enode *head);
 ssize_t _getline2(char **lineptr, size_t *n, FILE *stream);
 
 int _run_inbuilt(char *command, char **args, int i, enode *env);
+
+void launch_prep(char **args, char *command);
 /* int _cdir_ls(char *filepath, enode *env); */
 
 #endif

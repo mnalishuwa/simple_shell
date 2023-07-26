@@ -24,8 +24,7 @@ char *search_path(char *command, enode *env)
 	pathvalue = _getenv(PATH_VARNAME, env);
 	if (pathvalue == NULL || command == NULL || _strlen(command) == 0)
 	{
-		free(pathvalue);
-		pathvalue = NULL;
+		free_null(pathvalue); /* pathvalue = NULL; */
 		return (NULL);
 	}
 	clen = _strlen(command);
