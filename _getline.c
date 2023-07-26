@@ -52,6 +52,25 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 }
 
 /**
+ * _getline2 - custom getline function
+ * Description: function reads input from stdin
+ *
+ * @lineptr: address of text buffer
+ * @n: number of bytes to read
+ * @stream: FILE stream to read from
+ *
+ * Return: ssize_t, number of bytes read
+ */
+ssize_t _getline2(char **lineptr, size_t *n, FILE *stream)
+{
+	ssize_t bw;
+
+	bw = getline(lineptr, n, stream);
+
+	return (bw);
+}
+
+/**
  * _fileno - returns the file descriptor associated with a file
  * Description: takes a FILE struct pointer and return the file descriptor
  * associated with the file

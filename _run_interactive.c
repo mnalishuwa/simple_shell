@@ -10,7 +10,7 @@
  * Return: void
  *
  */
-void _run_shell(char **env)
+void _run_shell(enode *env)
 {
 	char *lineptr, **args, __attribute__((unused))*normalized_line, *command;
 	int __attribute__((unused)) status = 0, i = 0;
@@ -21,7 +21,7 @@ void _run_shell(char **env)
 		i++;
 		if (isatty(STDIN_FILENO))
 			print_prompt();
-		lineptr = read_line();
+		lineptr = read_line(env);
 		if (_strlen(lineptr) == 0 || lineptr[0] == '\0' || lineptr[0] == '\n')
 		{
 			free(lineptr);
@@ -38,7 +38,7 @@ void _run_shell(char **env)
 		args = _strtok(lineptr, " "); /* free(normalized_line); */
 		if (check_inbuilt(args[0], args, env) == 0)
 		{
-			/* free_args(args); */
+/* free_args(args); */
 			continue;
 		}
 		command = search_path(args[0], env);
@@ -60,6 +60,7 @@ void _run_shell(char **env)
 		status = launch_program(args, env);
 		free_args(args);
 	}
+	free_list(&env);
 }
 
 /**
@@ -71,10 +72,11 @@ void _run_shell(char **env)
  *
  * Return: int
  */
-int launch_program(char **args, char **env)
+int launch_program(char **args, enode *env)
 {
 	int status;
 	pid_t child_pid, __attribute__((unused)) wchild_pid;
+	(void)env;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -85,7 +87,12 @@ int launch_program(char **args, char **env)
 
 	if (child_pid == 0)
 	{
-		if (execve(args[0], args, env) == -1)
+/* if (execve(args[0], args, env) == -1) */
+/**
+ * NB: passing NULL to execve makes the new program inherit
+ * the env of the calling process
+ */
+		if (execve(args[0], args, NULL) == -1)
 		{
 			perror("./hsh:");
 		}

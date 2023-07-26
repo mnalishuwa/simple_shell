@@ -9,13 +9,16 @@
  * @env: environment pointer
  *
  * Return: int
-*/
+ */
 int main(int argc, char **argv, char **env)
 {
+	enode *_env = NULL;
+
 	(void)argc;
 	(void)argv;
 
-	_run_shell(env);
+	_env = strargs_tolist(env);
+	_run_shell(_env);
 
 	return (0);
 }

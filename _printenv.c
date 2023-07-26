@@ -1,23 +1,26 @@
 #include "main.h"
 
 /**
- * _printenv - prints environment
- * Description: prints environment using global variable environ
+ * printenv_ls2 - prints all environment variables in linked list
+ * Description: prints the env variables
  *
- * @env: environment array pointer
+ * @head: pointer to start of the list
  *
- * Return: 0 Success
+ * Return: void
  */
-
-void _printenv(char **env)
+void _printenv(enode *head)
 {
-	size_t i = 0;
+	enode *current_node = head;
 
-	while (env[i] != NULL)
+	if (current_node == NULL)
+		return;
+
+	while (current_node)
 	{
-		_puts(env[i]);
+		_puts(current_node->name);
+		_puts("=");
+		_puts(current_node->value);
 		_puts("\n");
-		i++;
+		current_node = current_node->next_node;
 	}
-
 }

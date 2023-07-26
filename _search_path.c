@@ -12,7 +12,7 @@
  *
  * Return: command path to executable, or NULL if not found
  */
-char *search_path(char *command, char **env)
+char *search_path(char *command, enode *env)
 {
 	size_t dir_len = 0, clen = 0, i;
 	char *pathvalue, **pathdirs, *full_cpath = NULL;
