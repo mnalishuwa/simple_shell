@@ -13,7 +13,6 @@ void ctrlc_handler(int sig_int)
 {
 	(void)sig_int;
 	signal(SIGINT, ctrlc_handler);
-	/* _puts("Ctrl-c typed\n"); */
 	print_prompt();
 }
 
@@ -25,22 +24,21 @@ void ctrlc_handler(int sig_int)
  * @nread: int, getline return value
  * @e_no: int, errno value
  * @lineptr: string
+ * @env: environment pointer
  *
  * Return:  void
  */
-void eof_handler(int nread, int e_no, char *lineptr)
+void eof_handler(int nread, int e_no, char *lineptr, enode *env)
 {
-	/* if get line fails when Ctrl-D is typed */
+/* if get line fails when Ctrl-D is typed */
 	if (nread < 1 && (e_no != ENOMEM || e_no != EINVAL))
 	{
-		/* _puts("Ctlr-D Handled, exiting gracefully ...\n"); */
-		/* _puts("\n"); */
 		if (lineptr)
 		{
 			free(lineptr);
 			lineptr = NULL;
 		}
-		_exit_hsh(lineptr, NULL, EXIT_SUCCESS);
+		_exit_hsh(lineptr, NULL, env, EXIT_SUCCESS);
 	}
 }
 
@@ -52,16 +50,17 @@ void eof_handler(int nread, int e_no, char *lineptr)
  * @status: int, exit status
  * @lineptr: string command
  * @args: arguments array
+ * @env: environment pointer
  *
  * Return: void
  */
-void _exit_hsh(char *lineptr, char **args, int status)
+void _exit_hsh(char *lineptr, char **args, enode *env, int status)
 {
 	(void)lineptr;
-	/* _puts("Now exiting\n"); */
-	/* if (lineptr != NULL) */
-	/*	free(lineptr); */
+
 	if (args != NULL)
 		free_args(args);
+	if (env != NULL)
+		free_list(&env);
 	exit(status);
 }

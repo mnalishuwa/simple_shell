@@ -7,12 +7,12 @@
  *
  * @command: str / command entry
  * @num: int, command number
- * @env: pointer to environment array
+ * @env: pointer to first not in env variables linked list
  * @args: arguments array
  *
  * Return: void
  */
-void cmd_not_found(char *command, char **args, int num, char **env)
+void cmd_not_found(char *command, char **args, int num, enode *env)
 {
 
 	char *exe_name;

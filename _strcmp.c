@@ -16,7 +16,6 @@
  * match, 0 otherwise
  */
 
-
 int _strcmp(char *s1, char *s2)
 {
 

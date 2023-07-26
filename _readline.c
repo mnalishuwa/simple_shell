@@ -8,14 +8,14 @@
  *
  * Return: a pointer to the string entered by the user
  */
-char *read_line(void)
+char *read_line(enode *env)
 {
 	char *_lineptr = NULL;
 	ssize_t nread;
 	size_t len = 0;
 
 	nread = getline(&_lineptr, &len, stdin);
-	eof_handler(nread, errno, _lineptr);
+	eof_handler(nread, errno, _lineptr, env);
 
 	if (nread == -1)
 	{
