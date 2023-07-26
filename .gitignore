@@ -5,4 +5,3 @@
 main.out
 [0-9]*.c
 .bash
-tests
